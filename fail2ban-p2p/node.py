@@ -215,9 +215,9 @@ class Node:
 
         """
         error = False
-	friendPath = os.path.join(self.configPath, 'friends')
+        friendPath = os.path.join(self.configPath, 'friends')
         friends = [f for f in os.listdir(friendPath) if os.path.isfile(os.path.join(friendPath, f))]
-	if not friends:
+        if not friends:
             logger.warning("No friends found. In order to properly use fail2ban-p2p" +
                            " add at least one friend.")
 

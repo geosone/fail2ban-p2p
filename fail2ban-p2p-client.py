@@ -105,7 +105,7 @@ if args.b or dump:
         #"protocolVersion": version.protocol,
         "msg": serializable_dict,
         "signature": StringSignature,
-	    "protocolVersion": version.protocolVersion
+            "protocolVersion": version.protocolVersion
     }
     cmdsigned = json.dumps(signed_dict) 
 

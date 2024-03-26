@@ -39,5 +39,5 @@ def create_keys():
         logger.debug("Public key was saved to " + c.pubkey)
     except IOError as e:
         logger.error("Could not save the keypair, check permissions! " + "%s" % e)
-	exit()
+        exit()
 

@@ -29,7 +29,7 @@ class Config:
     threshold = 0    
 
     def __init__(self, configPath = '/etc/fail2ban-p2p'):
-	self.__dict__ = self.__shared_state # borg pattern.
+        self.__dict__ = self.__shared_state # borg pattern.
 
     def loadConfig(self):
         """
