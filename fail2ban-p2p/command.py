@@ -12,6 +12,7 @@ import config
 import log
 import crypto
 import M2Crypto
+import binascii
 
 import json
 import util
@@ -89,8 +90,9 @@ class Command:
 
         SignEVP = M2Crypto.EVP.load_key(c.privkey)
         SignEVP.sign_init()
-        SignEVP.sign_update(text)
-        StringSignature = SignEVP.sign_final().encode('hex')
+        encoded_text = text.encode('utf-8')
+        SignEVP.sign_update(encoded_text)
+        StringSignature = binascii.hexlify(SignEVP.sign_final()).decode('utf-8')
         logger.debug("Our signature for this message is: " + StringSignature)
         self.signature = StringSignature
         return StringSignature
