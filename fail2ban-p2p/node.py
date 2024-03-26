@@ -232,7 +232,7 @@ class Node:
                 error = True
             if pubkey:
                 logger.debug("read friend's public key: %s" % pubkey )
-                uid = str(hashlib.sha224(pubkey).hexdigest())
+                uid = str(hashlib.sha224(pubkey.encode(encoding = 'UTF-8', errors = 'strict')).hexdigest())
             try:
                 address = re.search("address\s*=\s*(.*)", friendinfo).group(1)
             except AttributeError:
