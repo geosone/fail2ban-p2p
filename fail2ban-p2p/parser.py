@@ -30,7 +30,7 @@ def getDictValue(dict, key):
 
     try:
         return dict[key]
-    except KeyError, e:
+    except KeyError as e:
         return False
             
 def parse(msg):
@@ -49,7 +49,7 @@ def parse(msg):
 
     try:
         signed_dict = json.loads(msg)
-    except ValueError, e:
+    except ValueError as e:
         logger.warning("The received message does not appear to be valid json.")
         return False
 

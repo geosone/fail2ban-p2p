@@ -8,7 +8,7 @@
 
 import config
 import socket
-import thread
+import _thread
 import threading
 from command import Command
 import server
@@ -74,7 +74,7 @@ class Node:
                 for sock in readable:
                     client_socket, address = sock.accept()
                     logger.debug("connection from "+address[0])
-                    thread.start_new_thread(server.serve, (self, client_socket, address))
+                    _thread.start_new_thread(server.serve, (self, client_socket, address))
         except Exception as e:
             print(e)
 

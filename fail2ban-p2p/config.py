@@ -6,7 +6,7 @@
 # Licensed under the GNU GENERAL PUBLIC LICENSE Version 3. For details
 # see the file COPYING or http://www.gnu.org/licenses/gpl-3.0.en.html.
 
-import ConfigParser
+import configparser
 import os
 import logging
 
@@ -49,15 +49,15 @@ class Config:
             '''
             try:
                 value = config.get(section, option)
-            except (ConfigParser.NoOptionError, ConfigParser.NoSectionError):
+            except (configparser.NoOptionError, configparser.NoSectionError):
                 if mandatory:
-                    print  "Mandatory option " + option + " not found in config file " + self.configFile
+                    print("Mandatory option " + option + " not found in config file " + self.configFile)
                     return False
                 else:
                     value = default
             return value
 
-        config = ConfigParser.RawConfigParser()
+        config = configparser.RawConfigParser()
         self.configFile = os.path.join(self.configPath, 'fail2ban-p2p.conf')
 
         if os.access(self.configFile, os.R_OK):
@@ -74,6 +74,6 @@ class Config:
             self.threshold = get_option('Node', 'threshold', False, 80)
             
         else:
-            print('ERROR: Configuration directory "'  + self.configPath + '" does not exist.\n' +
-                  'Please create a configuration or specify another valid configuration directory with the "-c" argument.')
+            print(('ERROR: Configuration directory "'  + self.configPath + '" does not exist.\n' +
+                  'Please create a configuration or specify another valid configuration directory with the "-c" argument.'))
             return False

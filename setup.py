@@ -55,9 +55,9 @@ setup(
 
 # Update config file
 if argv[1] == "install":
-        print
-        print "Please do not forget to update your configuration files."
-        print "They are in /etc/fail2ban-p2p/."
-        print
+        print()
+        print("Please do not forget to update your configuration files.")
+        print("They are in /etc/fail2ban-p2p/.")
+        print()
 
 

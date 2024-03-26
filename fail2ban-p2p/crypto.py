@@ -24,8 +24,8 @@ def create_keys():
     """
 
     if os.path.isfile(c.privkey) or os.path.isfile(c.pubkey):
-        print "A keypair for this node already exists."
-        ask = raw_input('Do you really want to create a new one? [y/N] ')
+        print("A keypair for this node already exists.")
+        ask = input('Do you really want to create a new one? [y/N] ')
         if ask != "y":
             return
     M2Crypto.Rand.rand_seed (os.urandom (1024))
@@ -33,11 +33,11 @@ def create_keys():
     keypair = M2Crypto.RSA.gen_key (1024, 65537)
     try:
         keypair.save_key(c.privkey, None)
-        os.chmod(c.privkey, 0400)
+        os.chmod(c.privkey, 0o400)
         keypair.save_pub_key(c.pubkey)
         logger.debug("Private key (secret) was saved to " + c.privkey)
         logger.debug("Public key was saved to " + c.pubkey)
-    except IOError, e:
+    except IOError as e:
         logger.error("Could not save the keypair, check permissions! " + "%s" % e)
 	exit()
 

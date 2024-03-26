@@ -52,7 +52,7 @@ if c.loadConfig() == False:
     exit()
 
 if not args.d and not args.b:
-    print "Please use the -b argument to specify an IP to ban or -d to request information about banned nodes."
+    print("Please use the -b argument to specify an IP to ban or -d to request information about banned nodes.")
     exit()
 
 dump = False
@@ -120,10 +120,10 @@ try:
     s.send(cmdsigned)
     ret = s.recv(1048576) # we need about 50 Bytes per banned node
     if not quiet and args.v:
-        print ("Message sent: " + cmdsigned)
+        print(("Message sent: " + cmdsigned))
 except:
     if not quiet:
-        print ("could not connect to  "+c.name+" ("+c.addresses[0]+":"+str(c.port)+")")
+        print(("could not connect to  "+c.name+" ("+c.addresses[0]+":"+str(c.port)+")"))
 finally:
     s.close()
 
@@ -135,17 +135,17 @@ if ret:
         elif args.d == "json":
             print(ret)
         elif args.d == "count":
-            print(len(json.loads(ret)))
+            print((len(json.loads(ret))))
         else:
             banList = json.loads(ret)
             if len(banList) > 0:
-                print("IP".ljust(15, ' ') + "\tTimestamp\t\tBantime\t\tTrustlevel\tStatus")
+                print(("IP".ljust(15, ' ') + "\tTimestamp\t\tBantime\t\tTrustlevel\tStatus"))
                 for ban in banList:
                     status = "PENDING"
                     if int(c.threshold) <= int(ban['Trustlevel']):
                         status = "BANNED"
-                    print(ban['AttackerIP'].ljust(15, ' ') + "\t" + str(ban['Timestamp']) + "\t\t" + str(ban['BanTime']) + "\t\t" + str(ban['Trustlevel'])) + "\t\t" + status
+                    print((ban['AttackerIP'].ljust(15, ' ') + "\t" + str(ban['Timestamp']) + "\t\t" + str(ban['BanTime']) + "\t\t" + str(ban['Trustlevel'])) + "\t\t" + status)
             else:
                 print("No hosts in banlist")
     else:
-        print("Answer: " + ret)
+        print(("Answer: " + ret))

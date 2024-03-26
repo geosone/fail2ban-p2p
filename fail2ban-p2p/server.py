@@ -42,13 +42,13 @@ def serve(n, connection, address):
             else:
                 connection.send("OK\n")
 
-        except customexceptions.InvalidMessage, e:
+        except customexceptions.InvalidMessage as e:
             connection.send("ERROR Invalid message\n")
             logger.warn("This message made no sense.")
-        except customexceptions.InvalidSignature, e:
+        except customexceptions.InvalidSignature as e:
             connection.send("ERROR invalid signature\n")
             logger.warn("The Signature could not be verified")
-        except customexceptions.InvalidProtocolVersion, e:
+        except customexceptions.InvalidProtocolVersion as e:
             connection.send("ERROR invalid protocol version\n")
     else:
         connection.send("Error\n")

@@ -47,7 +47,7 @@ def initialize_logging(name="unknown"):
             log2file.setLevel(c.logLevel)
             logger.addHandler(log2file)
         except:
-            print("--- WARNING --- LOGFILE " + c.logFile + " IS EITHER NONEXISTENT OR NOT WRITABLE") 
+            print(("--- WARNING --- LOGFILE " + c.logFile + " IS EITHER NONEXISTENT OR NOT WRITABLE")) 
         log2stderr = logging.StreamHandler(sys.stderr)
         log2stderr.setFormatter(formatter)
         log2stderr.setLevel(c.logLevel)

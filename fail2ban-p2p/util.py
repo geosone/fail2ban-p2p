@@ -28,9 +28,9 @@ def sort_recursive(dictionary):
     OrderedDict([('a', '2'), ('b', OrderedDict([('d', 1), ('e', 4)])), ('c', 3), ('f', 5)])
 
     """
-    sorted_list = OrderedDict(sorted(dictionary.items(), key = lambda x: x[0]))
+    sorted_list = OrderedDict(sorted(list(dictionary.items()), key = lambda x: x[0]))
     # TODO test for cyclic structures.
-    for key, value in sorted_list.items():
+    for key, value in list(sorted_list.items()):
         if type(value) is dict:
             sorted_list[key] = sort_recursive(value)
 
