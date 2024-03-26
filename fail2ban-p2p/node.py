@@ -199,7 +199,7 @@ class Node:
 
         logger.debug("our own pubkey is: %s" % pubkey)
 
-        self.uid = str(hashlib.sha224(pubkey).hexdigest())
+        self.uid = str(hashlib.sha224(pubkey.encode(encoding = 'UTF-8', errors = 'strict')).hexdigest())
         logger.debug("that makes our own uid: %s", self.uid)
         self.addresses = c.addresses
         self.port = c.port
