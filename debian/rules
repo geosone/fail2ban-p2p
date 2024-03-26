@@ -11,17 +11,55 @@
 
 DESTDIR=$(CURDIR)/debian/fail2ban-p2p
 
-%:
-	dh $@ --with python3
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	touch configure-stamp
 
-# Override auto test because upstream do not use the standard unittest discover
-override_dh_auto_test:
+build:
 
-# Override of auto_build
-override_dh_auto_build:
+clean: clean-inits
+	dh_testdir
+	dh_testroot
+	rm -f  build-stamp configure-stamp
+	rm -rf build
+	# Does not hurt to ask distutils to do their duty
+	python3 setup.py clean
+	# Enforce removal of *.pyc files. Apparently dh_clean does
+	# not perform find on provided filename patterns.
+	find . -name \*.pyc -exec rm -f {} \;
+	dh_clean
 
-# Override of auto_install to remove information from package
-override_dh_auto_install:
-	#dh_auto_install
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+
+	# Install the package into debian/fail2ban-p2p.
 	python3 setup.py install --root=$(DESTDIR) --no-compile --install-layout=deb
 
+#
+# Just to comply with policy 4.8
+binary-arch:
+
+# Build architecture-independent files here.
+binary-indep: install
+	dh_testdir
+	dh_testroot
+	#dh_installchangelogs ChangeLog
+	dh_installdocs
+	dh_installlogrotate
+	dh_python2
+	dh_installinit -- defaults 99
+	#dh_installman man/*.1
+	dh_link
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep
+.PHONY: build clean binary-indep binary-arch binary install configure copy-inits clean-inits
