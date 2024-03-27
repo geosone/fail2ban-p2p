@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 
 # Copyright 2013 Johannes Fuermann <johannes at fuermann.cc>
 # Copyright 2013 Manuel Munz <manu at somakoma.de>
